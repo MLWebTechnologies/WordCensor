@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id: wordcensor.xml 17227 2013-08-11 05:17:52Z ml $ -->
+<extension version="3.0" type="plugin" group="content">
+	<name>Content - WordCensor</name>
+	<author>Mike Leeper</author>
+	<creationDate>August 2013</creationDate>
+	<copyright>Mike Leeper</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>web@mlwebtechnologies.com</authorEmail>
+	<authorUrl>http://www.mlwebtechnologies.com</authorUrl>
+	<version>3.0.0</version>
+	<description>Find and replace words in all site content.</description>
+	<files>
+		<filename plugin="wordcensor">wordcensor.php</filename>
+		<filename plugin="wordcensor">badwords.txt</filename>
+		<filename plugin="wordcensor">index.html</filename>
+    <folder>wordcensor</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+		<field name="filter_method" type="list" default="0" label="Filter Method:" description="Bad word filter method.  The standard filter will replace the exact word.  The custom filter included will replace the whole word where a match occurs." >
+			<option value="0">Standard Filter</option>
+			<option value="1">Custom Filter</option>
+		</field>
+		<field name="custom_filter" type="text" size="30" default="/\b\w*%badword%\w*\b/i" label="Custom Filter:" description="Regex string to use in content filter. Use the %badword% variable in this string for inclusion of bad words list." />
+		<field name="spacer1" type="spacer" hr="true"	/>
+		<field name="replacement_method" type="list" default="0" label="Replacement Method:" description="Replace only the bad words in content or replace all content containing bad words with the replacement phrase." >
+			<option value="0">Replace Word</option>
+			<option value="1">Replace All Text</option>
+		</field>
+		<field name="replace_word" type="list" default="0" label="Replacement Characters:" description="Bad Word will be replaced with these characters." >
+			<option value="*">****</option>
+			<option value="@#$%">@#$%</option>
+		</field>
+		<field name="replace_all_text" type="textarea" cols="32" rows="2" default="Contents contained words that are not allowed." label="Replacement Phrase:" description="All content containing bad words will be replaced with this phrase" />
+		<field name="spacer2" type="spacer" hr="true"	/>
+		<field name="word_list" type="list" default="1" label="Word List:" description="Word list to use. Choose Manual word entry to use list of words entered in the Bad Words to be Filtered configuration box.  Choose Word File to use the bad words list file located in the plugins\content\wordcensor directory. Choose Both to use both." >
+			<option value="0">Use Manual Word Entry</option>
+			<option value="1">Use Word File</option>
+			<option value="2">Use Both</option>
+		</field>
+		<field name="bad_words" type="textarea" default="" cols="32" rows="2" label="Bad Words to be Filtered:" description="Bad Words to be Filtered (Separate with a comma)" />
+		<field name="allowed_words" type="textarea" cols="32" rows="2" default="" label="Allowed Words:" description="Allowed words which may otherwise be replaced by content filter (Separate with a comma)" />
+      </fieldset>
+		</fields>
+	</config>
+</extension>
